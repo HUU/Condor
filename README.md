@@ -78,10 +78,11 @@ in a `Makefile`. The key tools to know about:
 
 - `pnpm + node` are for developer tools since there are lots of handy linters and
   utilities in NPM.
-- `python` (with `poetry` for package management) for backends
+- `python` (with [Poetry](https://python-poetry.org/) for package management) for
+  backends
 - `flutter` for mobile + web universal apps
-- All of the above are installed / managed by `asdf` to avoid issues with different
-  versions/different dev environments
+- All of the above are installed / managed by [asdf](https://asdf-vm.com/) to avoid
+  issues with different versions/different dev environments
 
 Code is stored in either `apps/` or `lib/` as follows:
 

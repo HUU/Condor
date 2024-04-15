@@ -1,0 +1,51 @@
+{
+	"folders": [
+		{
+      "name": "Root",
+			"path": "."
+		},
+    {
+      "name": "Backend API",
+			"path": "apps/backend"
+		},
+    {
+      "name": "Mobile App",
+      "path": "apps/mobile"
+    },
+    {
+      "name": "FastAPI Extensions",
+			"path": "lib/fastapi-extensions"
+		},
+	],
+	"settings": {
+    "search.exclude": {
+      "**/pnpm-lock.yaml": true
+    },
+    "editor.rulers": [120],
+    "files.exclude": {
+      "**/.venv": true,
+      "**/__pycache__": true,
+      "**/build": true,
+      "**/.dart_tool": true,
+      "**/.idea": true,
+      "**/node_modules": true,
+    },
+    "[markdown]": {
+      "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+    },
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsonc]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+	},
+  "extensions": {
+    "recommendations": ["streetsidesoftware.code-spell-checker", "DavidAnson.vscode-markdownlint", "esbenp.prettier-vscode"]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+    ]
+  }
+}

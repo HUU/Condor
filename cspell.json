@@ -1,0 +1,39 @@
+{
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  "version": "0.2",
+  "dictionaryDefinitions": [
+    {
+      "name": "griblet-dictionary",
+      "path": "./cspell-extra-dictionary.txt",
+      "addWords": true
+    }
+  ],
+  "dictionaries": ["griblet-dictionary"],
+  "ignorePaths": [
+    "/cspell-extra-dictionary.txt",
+    "cspell.json",
+    "pnpm-lock.yaml",
+    "packages.json",
+    "*-task-definition.json",
+    "*Dockerfile",
+    "*.code-workspace",
+    "*.otf",
+    "*.woff",
+    "*.woff2",
+    "*.ttf",
+    "*.svg",
+    "*.mp4",
+    "pyproject.toml",
+    "*.xcconfig",
+    "*.xcodeproj",
+    "*.xcassets",
+    "*.xcworkspace",
+    "*.plist",
+    "*.lproj",
+    "/lib/generated",
+    "poetry.toml",
+    "pubspec.yaml",
+    "Makefile",
+    "package.json"
+  ]
+}

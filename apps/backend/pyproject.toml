@@ -1,0 +1,44 @@
+[tool.poetry]
+name = "backend"
+version = "1.0.0"
+description = "FastAPI backend."
+authors = [ ]
+license = "Proprietary"
+
+[[tool.poetry.packages]]
+include = "api"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.110.1"
+sqlmodel = "^0.0.16"
+bcrypt = "^4.1.2"
+email-validator = "^2.1.1"
+uvicorn = "^0.29.0"
+python-jose = "^3.3.0"
+fastapi-extensions = {path = "../../lib/fastapi-extensions", develop = true}
+
+[tool.poetry.group.dev.dependencies]
+autopep8 = "2.0.2"
+flake8 = "6.0.0"
+pytest = "7.3.1"
+pytest-sugar = "0.9.7"
+pytest-cov = "4.1.0"
+pytest-html = "3.2.0"
+black = "^24.4.0"
+isort = "^5.13.2"
+
+[tool.coverage.run]
+branch = true
+source = [ "api" ]
+
+[tool.coverage.report]
+exclude_lines = [ "if TYPE_CHECKING:" ]
+show_missing = true
+
+[tool.pytest.ini_options]
+addopts = "--cov --cov-report html:'../../coverage/apps/backend/html' --cov-report xml:'../../coverage/apps/backend/coverage.xml' --html='../../reports/apps/backend/unittests/html/index.html' --junitxml='../../reports/apps/backend/unittests/junit.xml'"
+
+[build-system]
+requires = [ "poetry-core" ]
+build-backend = "poetry.core.masonry.api"

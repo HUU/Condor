@@ -1,0 +1,6 @@
+.venv
+lib/generated
+**/LaunchImage.imageset/**/*
+**/Assets.xcassets/**/*
+.dart_tool
+build

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # https://google.github.io/styleguide/shellguide.html
 
 set -e
@@ -55,13 +55,15 @@ function main() {
   local input=''
   local output=''
   local pub_name=''
+  local verify_updated=FALSE
 
-  while builtin getopts "o:i:n:h" opt; do
+  while builtin getopts "o:i:n:hv" opt; do
 
       case $opt in
         i) input="${OPTARG}" ;;
         o) output="${OPTARG}" ;;
         n) pub_name="${OPTARG}" ;;
+        v) verify_updated=TRUE ;;
         h) usage; exit 0
           ;;
         \?)
@@ -88,7 +90,7 @@ function main() {
     exit 1
   fi
 
-  if [[ -z "${pub_name}" ]] || ! echo "${pub_name}" | grep -E -q '^[a-z0-9_]+$'; then
+  if ! $verify_updated && ([[ -z "${pub_name}" ]] || ! echo "${pub_name}" | grep -E -q '^[a-z0-9_]+$'); then
     echo "must specify a pubspec package name made of lowercase letters, numbers, or _ with -n"
     usage
     exit 1
@@ -98,14 +100,18 @@ function main() {
   local -r spec_hash=$(md5 -q "${input}")
 
   if test -f "${spec_hash_path}" && [[ $(< "${spec_hash_path}") == "${spec_hash}" ]]; then
-    echo "openapi spec has not changed, skipping code generation."
+    echo "openapi spec has not changed"
     exit 0
+  fi
+
+  if $verify_updated; then
+    echo "openapi spec has changed, you need to regenerate the client."
+    exit 1
   fi
 
   run_generator "${input}" "${output}" "${pub_name}"
   finish_codegen "${output}"
   echo "${spec_hash}" > "${spec_hash_path}"
-  cleanup
   exit 0
 }
 

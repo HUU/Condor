@@ -10,8 +10,8 @@ import 'package:built_value/serializer.dart';
 part 'fart_variety.g.dart';
 
 class FartVariety extends EnumClass {
-  @BuiltValueEnumConst(wireName: r'Toot')
-  static const FartVariety toot = _$toot;
+  @BuiltValueEnumConst(wireName: r'Toooot')
+  static const FartVariety toooot = _$toooot;
   @BuiltValueEnumConst(wireName: r'Brap')
   static const FartVariety brap = _$brap;
   @BuiltValueEnumConst(wireName: r'thrrrrp')

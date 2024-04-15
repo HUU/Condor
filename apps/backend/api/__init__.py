@@ -11,7 +11,7 @@ app = FastAPI()
 
 # spell-checker: disable
 class FartVariety(str, Enum):
-    toot = "Toot"
+    toot = "Toooot"
     brap = "Brap"
     thrrrrp = "thrrrrp"
     bwompff = "BWOMPFF"

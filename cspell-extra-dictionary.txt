@@ -11,3 +11,7 @@ runtimes
 libexec
 sandboxing
 pubspec
+softwareupdate
+xcodebuild
+cocoapods
+depcheck

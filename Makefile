@@ -1,13 +1,18 @@
 PYTHON_PROJECTS := $(shell find . -name 'pyproject.toml' -not -path "./lib/generated/*" -exec dirname {} \;)
 DART_PROJECTS := $(shell find . -name 'pubspec.yaml' -not -path "./lib/generated/*" -exec dirname {} \;)
 
-.PHONY: dart_api_client generate_openapi_spec lint format
+.PHONY: dart_api_client generate_openapi_spec verify_api_client_updated lint format install depcheck
 
 dart_api_client: generate_openapi_spec
 	tools/openapi-generator/generate.sh -i /tmp/openapi.json -o lib/generated/backend-api-client -n backend_api_client
 
 generate_openapi_spec:
 	cd apps/backend && poetry run python tools/save-openapi.py --out /tmp/openapi.json api:app
+
+verify_api_client_updated: generate_openapi_spec
+	tools/openapi-generator/generate.sh -i /tmp/openapi.json -o lib/generated/backend-api-client -v
+
+install: $(addprefix __pyinstall_,$(PYTHON_PROJECTS)) $(addprefix __dartinstall_,$(DART_PROJECTS))
 
 lint: $(addprefix __pylint_,$(PYTHON_PROJECTS)) $(addprefix __dartlint_,$(DART_PROJECTS))
 	@echo "🪮  \033[1;31mLinting shell scripts\033[0m"
@@ -21,6 +26,13 @@ format: $(addprefix __pyformat_,$(PYTHON_PROJECTS)) $(addprefix __dartformat_,$(
 	@echo "📝  \033[1;31mFormat config files\033[0m"
 	pnpm prettier --write '**/*.(md|yml|json)'
 
+depcheck:
+	python tools/depcheck.py $(PYTHON_PROJECTS)
+
+__pyinstall_./%:
+	@echo "📦  \033[1;31mSetting up $*\033[0m"
+	cd $* && poetry install
+
 __pylint_./%:
 	@echo "🪮  \033[1;31mLinting $*\033[0m"
 	cd $* && poetry run flake8 && poetry run black --quiet --check . && poetry run isort -c .
@@ -28,6 +40,10 @@ __pylint_./%:
 __pyformat_./%:
 	@echo "📝  \033[1;31mFormat $*\033[0m"
 	cd $* && poetry run black --quiet . && poetry run isort .
+
+__dartinstall_./%:
+	@echo "📦  \033[1;31mSetting up $*\033[0m"
+	cd $* && dart pub get
 
 __dartlint_./%:
 	@echo "🪮  \033[1;31mLinting $*\033[0m"

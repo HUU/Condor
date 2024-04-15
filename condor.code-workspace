@@ -21,7 +21,7 @@
     "search.exclude": {
       "**/pnpm-lock.yaml": true
     },
-    "editor.rulers": [120],
+    "editor.rulers": [88],
     "files.exclude": {
       "**/.venv": true,
       "**/__pycache__": true,

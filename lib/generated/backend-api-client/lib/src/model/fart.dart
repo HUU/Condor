@@ -25,7 +25,7 @@ abstract class Fart implements Built<Fart, FartBuilder> {
 
   @BuiltValueField(wireName: r'variety')
   FartVariety get variety;
-  // enum varietyEnum {  Toot,  Brap,  thrrrrp,  BWOMPFF,  BLART,  Shart,  };
+  // enum varietyEnum {  Toooot,  Brap,  thrrrrp,  BWOMPFF,  BLART,  Shart,  };
 
   Fart._();
 

@@ -6,7 +6,7 @@ part of 'fart_variety.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-const FartVariety _$toot = const FartVariety._('toot');
+const FartVariety _$toooot = const FartVariety._('toooot');
 const FartVariety _$brap = const FartVariety._('brap');
 const FartVariety _$thrrrrp = const FartVariety._('thrrrrp');
 const FartVariety _$BWOMPFF = const FartVariety._('BWOMPFF');
@@ -15,8 +15,8 @@ const FartVariety _$shart = const FartVariety._('shart');
 
 FartVariety _$valueOf(String name) {
   switch (name) {
-    case 'toot':
-      return _$toot;
+    case 'toooot':
+      return _$toooot;
     case 'brap':
       return _$brap;
     case 'thrrrrp':
@@ -34,7 +34,7 @@ FartVariety _$valueOf(String name) {
 
 final BuiltSet<FartVariety> _$values =
     new BuiltSet<FartVariety>(const <FartVariety>[
-  _$toot,
+  _$toooot,
   _$brap,
   _$thrrrrp,
   _$BWOMPFF,
@@ -44,7 +44,7 @@ final BuiltSet<FartVariety> _$values =
 
 class _$FartVarietyMeta {
   const _$FartVarietyMeta();
-  FartVariety get toot => _$toot;
+  FartVariety get toooot => _$toooot;
   FartVariety get brap => _$brap;
   FartVariety get thrrrrp => _$thrrrrp;
   FartVariety get BWOMPFF => _$BWOMPFF;
@@ -63,7 +63,7 @@ Serializer<FartVariety> _$fartVarietySerializer = new _$FartVarietySerializer();
 
 class _$FartVarietySerializer implements PrimitiveSerializer<FartVariety> {
   static const Map<String, Object> _toWire = const <String, Object>{
-    'toot': 'Toot',
+    'toooot': 'Toooot',
     'brap': 'Brap',
     'thrrrrp': 'thrrrrp',
     'BWOMPFF': 'BWOMPFF',
@@ -71,7 +71,7 @@ class _$FartVarietySerializer implements PrimitiveSerializer<FartVariety> {
     'shart': 'Shart',
   };
   static const Map<Object, String> _fromWire = const <Object, String>{
-    'Toot': 'toot',
+    'Toooot': 'toooot',
     'Brap': 'brap',
     'thrrrrp': 'thrrrrp',
     'BWOMPFF': 'BWOMPFF',

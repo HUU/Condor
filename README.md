@@ -66,10 +66,13 @@ that each project will use the language and framework-specific tools unadulterat
 `flutter` and `poetry`) for ease of development, and then anything custom is build rule
 in a `Makefile`. The key tools to know about:
 
+- `make install` -- download / update all dependencies across the repository
 - `make lint` -- runs all linters across the project (i.e. Python flake8, Dart analysis,
   cspell, prettier)
 - `make format` -- runs all automatic code formatters (i.e. Python black, Dart fix,
   prettier), should fix most lint violations
+- `make depcheck` -- verify all projects use the same version of dependencies to avoid
+  nasty diamond dependency issues.
 
 ## How does this repo work?
 

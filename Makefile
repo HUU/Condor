@@ -1,16 +1,17 @@
+ROOT_DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 PYTHON_PROJECTS := $(shell find . -name 'pyproject.toml' -not -path "./lib/generated/*" -exec dirname {} \;)
 DART_PROJECTS := $(shell find . -name 'pubspec.yaml' -not -path "./lib/generated/*" -exec dirname {} \;)
 
 .PHONY: dart_api_client generate_openapi_spec verify_api_client_updated lint format install depcheck
 
 dart_api_client: generate_openapi_spec
-	tools/openapi-generator/generate.sh -i /tmp/openapi.json -o lib/generated/backend-api-client -n backend_api_client
+	tools/openapi-generator/generate.sh -i $(ROOT_DIR)/tmp/openapi.json -o $(ROOT_DIR)/lib/generated/backend-api-client -n backend_api_client
 
 generate_openapi_spec:
-	cd apps/backend && poetry run python tools/save-openapi.py --out /tmp/openapi.json api:app
+	cd apps/backend && poetry run python tools/save-openapi.py --out $(ROOT_DIR)/tmp/openapi.json api:app
 
 verify_api_client_updated: generate_openapi_spec
-	tools/openapi-generator/generate.sh -i /tmp/openapi.json -o lib/generated/backend-api-client -v
+	tools/openapi-generator/generate.sh -i $(ROOT_DIR)/tmp/openapi.json -o lib/generated/backend-api-client -v
 
 install: $(addprefix __pyinstall_,$(PYTHON_PROJECTS)) $(addprefix __dartinstall_,$(DART_PROJECTS))
 

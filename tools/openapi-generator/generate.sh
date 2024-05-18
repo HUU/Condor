@@ -30,9 +30,12 @@ function run_generator() {
   local -r output_dir_path="$2"
   local -r pub_name="$3"
 
-  java -jar "${SCRIPT_PATH}/openapi-generator-cli.jar" generate \
-    -o "${output_dir_path}" \
-    -i "${input_spec_path}" \
+  local -r volume_mnt="/var/condor"
+  local -r relative_path_to_generator=${SCRIPT_PATH#"$(pwd)/"}
+
+  docker run -v "$(pwd):${volume_mnt}" ubuntu/jre:17-22.04_edge -jar "${volume_mnt}/${relative_path_to_generator}/openapi-generator-cli.jar" generate \
+    -o "${volume_mnt}/${output_dir_path#"$(pwd)/"}" \
+    -i "${volume_mnt}/${input_spec_path#"$(pwd)/"}" \
     -g "dart-dio" \
     --additional-properties "allowUnicodeIdentifiers=false,ensureUniqueParams=true,useEnumExtension=true,enumUnknownDefaultCase=false,prependFormOrBodyParameters=false,pubAuthor=Griblet,pubName=${pub_name},legacyDiscriminatorBehavior=true,sortModelPropertiesByRequiredFlag=true,sortParamsByRequiredFlag=true,wrapper=none"
 }
@@ -60,8 +63,8 @@ function main() {
   while builtin getopts "o:i:n:hv" opt; do
 
       case $opt in
-        i) input="${OPTARG}" ;;
-        o) output="${OPTARG}" ;;
+        i) input=$(realpath "${OPTARG}") ;;
+        o) output=$(realpath "${OPTARG}") ;;
         n) pub_name="${OPTARG}" ;;
         v) verify_updated=TRUE ;;
         h) usage; exit 0
@@ -109,11 +112,16 @@ function main() {
     exit 1
   fi
 
+  if [[ "${input}" != $PWD/* || "${output}" != $PWD/*  ]]; then
+    echo "script must be run from a common parent directory of both --input=${input} and --output=${output} paths."
+    exit 1
+  fi
+
   run_generator "${input}" "${output}" "${pub_name}"
   finish_codegen "${output}"
   echo "${spec_hash}" > "${spec_hash_path}"
   exit 0
 }
 
-_check_required_programs java dart
+_check_required_programs docker dart
 main "$@"

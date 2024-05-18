@@ -5,7 +5,8 @@ project and use OpenAPI specs to generate always up-to-date API clients.
 
 ## Prerequisites
 
-- Java 11 (should come with macOS)
+- Docker for Desktop (i.e. a working `docker` CLI), see
+  <https://www.docker.com/products/docker-desktop/>
 - Install homebrew, see <https://brew.sh/>
 - Install ASDF (tool for downloading language runtimes and SDKs, sandboxing them to
   specific directories, all controlled with `.tool-versions`)
